@@ -22,4 +22,23 @@ def geocode(place):
         print(f"API Request Failed. Status Code: {response.status_code}")
 
 
-print(geocode("Eis-Greissler, Graz"))
+def weatherforecast(lat: float, lon: float, hours: int = 48):
+    payload = {'latitude': lat,
+               'longitude': lon,
+               'hourly': "temperature_2m",
+               'forecast_hours': hours,
+               }
+    openmeteo_url = "https://api.open-meteo.com/v1/forecast"
+    response = requests.get(openmeteo_url, params=payload)
+    if response.status_code == 200:
+        try:
+            return response.json()["hourly"]
+        except:
+            print("Response received from API call has unexpected structure.",
+                  response.json())  # TODO: Exception Handling
+    else:
+        # TODO: Exception Handling
+        print(f"API Request Failed. Status Code: {response.status_code}")
+
+
+print(weatherforecast(*geocode("Eis-Greissler, Graz"), 4))
