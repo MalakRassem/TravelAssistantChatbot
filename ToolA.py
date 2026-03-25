@@ -1,6 +1,10 @@
 import requests
+from fastmcp import FastMCP
+
+mcp = FastMCP("ServerA")
 
 
+@mcp.tool
 def geocode(place):
     payload = {'q': place,
                'format': "jsonv2",
@@ -22,6 +26,7 @@ def geocode(place):
         print(f"API Request Failed. Status Code: {response.status_code}")
 
 
+@mcp.tool
 def weatherforecast(lat: float, lon: float, hours: int = 48):
     payload = {'latitude': lat,
                'longitude': lon,
@@ -41,4 +46,5 @@ def weatherforecast(lat: float, lon: float, hours: int = 48):
         print(f"API Request Failed. Status Code: {response.status_code}")
 
 
-print(weatherforecast(*geocode("Eis-Greissler, Graz"), 4))
+if __name__ == "__main__":
+    mcp.run(transport="http", port=8000)
