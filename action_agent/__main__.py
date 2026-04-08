@@ -9,8 +9,8 @@ from a2a.types import (
     AgentInterface,
     AgentSkill,
 )
-from executor import (
-    ActionAgentExecutor,
+from agent_executor.executor import (
+    ChatbotAgentExecutor,
 )
 from agent import build_action_agent
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     action_agent = asyncio.run(build_action_agent())
 
     request_handler = DefaultRequestHandler(
-        agent_executor=ActionAgentExecutor(action_agent),
+        agent_executor=ChatbotAgentExecutor(action_agent),
         task_store=InMemoryTaskStore(),
     )
 
