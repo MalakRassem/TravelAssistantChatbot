@@ -11,7 +11,7 @@ from a2a.utils.message import new_agent_text_message
 from a2a.utils.artifact import new_text_artifact
 
 
-class ActionAgentExecutor(AgentExecutor):
+class ChatbotAgentExecutor(AgentExecutor):
 
     def __init__(self, agent) -> None:
         self.agent = agent
