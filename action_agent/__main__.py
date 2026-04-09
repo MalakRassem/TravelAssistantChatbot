@@ -12,7 +12,7 @@ from a2a.types import (
 from agent_executor.executor import (
     ChatbotAgentExecutor,
 )
-from agent import build_action_agent
+from action_agent.agent import build_action_agent
 
 if __name__ == '__main__':
     geocode_skill = AgentSkill(
